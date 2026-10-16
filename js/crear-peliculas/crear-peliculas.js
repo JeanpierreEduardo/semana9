@@ -1,0 +1,2 @@
+import {iniciarAdmin,api,mensaje,preview,enviar} from '../admin/ui.js';
+if(await iniciarAdmin()){const form=document.getElementById('form-pelicula'),refrescar=preview(form);form.onsubmit=e=>{e.preventDefault();enviar(form,async d=>{const p=await api('/admin/peliculas',{method:'POST',body:JSON.stringify(d)});form.reset();refrescar();mensaje('Película creada: '+p.titulo+'. Estado: '+p.estado+'.')})}}

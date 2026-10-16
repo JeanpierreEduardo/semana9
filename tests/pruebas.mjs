@@ -1,0 +1,55 @@
+import {PGlite} from '@electric-sql/pglite';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('..',import.meta.url));
+const {MIGRACION,MIGRACION_ADMIN,MIGRACION_EMPLEADO,MIGRACION_TURNOS}=await import(new URL('../js/config/esquema.js',import.meta.url));
+const MIGRACION_RESERVAS=fs.readFileSync(root+'/sql/semana9.sql','utf8');
+export const db=new PGlite();
+for(const q of [...MIGRACION,...MIGRACION_ADMIN,...MIGRACION_EMPLEADO,...MIGRACION_TURNOS])await db.exec(q);
+await db.exec(MIGRACION_RESERVAS);
+await db.exec(MIGRACION_RESERVAS); // idempotent migration
+await db.exec(fs.readFileSync(root+'/sql/datos_demo_semana9.sql','utf8'));await db.exec(fs.readFileSync(root+'/sql/datos_demo_semana9.sql','utf8'));console.log('Migration and demo seed apply twice');
+export const sql=async(strings,...params)=>{const query=strings.reduce((s,x,i)=>s+(i?'$'+i:'')+x,'');return (await db.query(query,params)).rows};
+await db.exec("INSERT INTO usuarios(nombre,correo,contrasena,rol) VALUES ('Cliente Prueba','cliente@test.com','12345678','usuario'),('Administrador Prueba','admin@test.com','12345678','administrador'),('Empleado Prueba','empleado@test.com','12345678','empleado'); UPDATE usuarios SET turno_nombre='Prueba',turno_inicio='00:00',turno_fin='23:59:59' WHERE rol='empleado';");
+const {crearOperaciones}=await import(new URL('../js/config/operaciones.js',import.meta.url));
+export function operador(){const m=new Map();return crearOperaciones(sql,{getItem:k=>m.get(k),setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)},crypto)}
+export const cliente=operador(),cajero=operador(),empleado=operador();
+const post=(op,r,d)=>op(r,{method:'POST',body:JSON.stringify(d)});
+await post(cliente,'/auth/login',{correo:'cliente@test.com',contrasena:'12345678'});
+await post(cajero,'/auth/login',{correo:'caja@correo.com',contrasena:'1234'});
+await post(empleado,'/auth/login',{correo:'empleado@test.com',contrasena:'12345678'});
+const {calcularMontoServicio}=await import(new URL('../js/registro/tarifario.js',import.meta.url));
+assert.equal(calcularMontoServicio({tipo_sala:'3d',cantidad:3,fecha_funcion:'2026-10-13'}),52.8);
+assert.equal(calcularMontoServicio({tipo_sala:'general',cantidad:2,fecha_funcion:'2026-10-16'}),32);
+const {luhn,validarPago}=await import(new URL('../js/pago/validaciones.js',import.meta.url));assert(luhn('4111111111111111'));assert(!luhn('4111111111111112'));
+assert.throws(()=>validarPago({metodo:'tarjeta',numero:'4242424242424242',vencimiento:'01/25',cvv:'111',titular:'ROSA'}),/vencida/);
+let n=0;export async function reserva(extra={}){const dia=String(1+n++).padStart(2,'0');return post(cliente,'/reservas',{pelicula:'silencio',fecha_funcion:'2027-01-'+dia,horario:'tarde',tipo_sala:'general',asientos:['A1','A2'],...extra})}
+async function pagar(d,expected){const r=await reserva();const p=await post(cliente,'/pagos',{id:r.id,metodo:'tarjeta',titular:'Prueba',...d});assert.equal(p.estado,expected);const [row]=await sql`SELECT * FROM compras_entradas_cine WHERE id=${r.id}`;assert.equal(Boolean(row.ticket_ingreso),expected==='aprobado');return [r,p]}
+export const [pagada,pago]=await pagar({numero:'4111111111111111',vencimiento:'12/29',cvv:'123'},'aprobado');
+await pagar({numero:'4000000000000002',vencimiento:'08/28',cvv:'456'},'rechazado');
+await pagar({numero:'5555555555554444',vencimiento:'05/30',cvv:'789'},'aprobado');
+await pagar({numero:'5105105105105100',vencimiento:'03/27',cvv:'321'},'rechazado');
+await pagar({numero:'378282246310005',vencimiento:'11/28',cvv:'1234'},'aprobado');
+await pagar({numero:'4111111111111111',vencimiento:'12/29',cvv:'999'},'rechazado');
+await pagar({metodo:'billetera',proveedor:'andipay',celular:'987654321',codigo:'123456'},'aprobado');
+await pagar({metodo:'billetera',proveedor:'pagomovil',celular:'912345678',codigo:'654321'},'rechazado');
+await pagar({metodo:'billetera',proveedor:'andipay',celular:'999888777',codigo:'000000'},'rechazado');
+const cash=await reserva();const cashpay=await post(cajero,'/pagos',{id:cash.id,canal:'caja',metodo:'efectivo',recibido:'50'});assert.equal(Number(cashpay.vuelto),50-Number(cashpay.monto));
+const pos=await reserva();await post(cajero,'/pagos',{id:pos.id,canal:'caja',metodo:'pos',voucher:'004513'});
+assert((await cajero('/caja/pagos')).some(x=>x.id===pago.id));await post(cajero,'/caja/verificar',{id:pago.id});assert((await cajero('/caja/pagos')).find(x=>x.id===pago.id).verificado);
+await assert.rejects(()=>cliente('/caja/pagos'),/exclusivo/);
+await assert.rejects(()=>post(cliente,'/pagos',{id:pagada.id,metodo:'tarjeta',titular:'Prueba',numero:'4111111111111111',vencimiento:'12/29',cvv:'123'}),/ya fue pagada/);
+const occupied=await reserva({fecha_funcion:'2027-02-01'});
+await assert.rejects(()=>reserva({fecha_funcion:'2027-02-01'}),/asiento_funcion_unico/);
+await assert.rejects(()=>post(empleado,'/empleado/ventas',{pelicula:'silencio',id_usuario:occupied.id_usuario,fecha_funcion:'2027-02-01',horario:'tarde',asientos:['A1'],tipo_sala:'general'}),/asiento_funcion_unico/);
+await post(cliente,'/reservas/'+occupied.id+'/cancelar',{});await reserva({fecha_funcion:'2027-02-01'});
+const editar=await reserva({fecha_funcion:'2027-02-02'});
+await assert.rejects(()=>post(cliente,'/reservas/editar',{id:editar.id,pelicula:'silencio',fecha_funcion:'2027-02-01',horario:'tarde',tipo_sala:'general',asientos:['A1']}),/asiento_funcion_unico/);
+assert.equal((await sql`SELECT COUNT(*)::int AS n FROM asientos_ventas WHERE compra_id=${editar.id}`)[0].n,2);
+await assert.rejects(()=>post(cliente,'/reservas/editar',{id:pagada.id,pelicula:'silencio',fecha_funcion:'2027-02-03',horario:'tarde',tipo_sala:'general',asientos:['A3']}),/pendientes/);
+const [balances]=await sql`SELECT MIN(saldo_disponible) AS minimo FROM banco_cuentas`;assert(Number(balances.minimo)>=0);
+assert.equal((await sql`SELECT COUNT(*)::int AS n FROM pagos WHERE id_registro=${pagada.id} AND estado='aprobado'`)[0].n,1);
+console.log('PASS: tariff, card scenarios 1–8, wallets 9–11, cash/POS 12–13, reconciliation 14, role 15, duplicate payment 16, shared seat collision, release, atomic edit rollback, paid edit guard.');
+fs.writeFileSync(root+'/tests/resultado.txt','Pruebas automatizadas en PostgreSQL embebido (PGlite), '+new Date().toISOString()+'\nEscenarios de lógica 1–16: PASS. Tarifario 52.80 / 32.00: PASS. Butacas compartidas, conflicto reserva/taquilla, cancelación, rollback de edición, bloqueo de edición pagada: PASS.\n');
+if(process.argv[2]!=='serve')await db.close();

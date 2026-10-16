@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Administración de clientes | CineMax Perú</title>
+    <link rel="stylesheet" href="css/administracion-clientes.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="administracion-clientes.html" class="logo">Cine<span>Max</span> <small>Administración</small></a>
+            <nav class="nav-principal" aria-label="Administración">
+                <ul></ul>
+            </nav>
+            <div id="nav-cuenta" class="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Administración de CineMax Perú</p>
+                    <h1>Administración de clientes</h1>
+                    <p>Consulta las cuentas de clientes, actualiza sus datos y administra su acceso.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando acceso…</p>
+            <section id="contenido-admin" hidden>
+                <div class="filtros">
+                    <label>Buscar por nombre o usuario
+                        <input id="buscar" type="search" placeholder="Nombre o correo">
+                    </label>
+                    <label>Estado
+                        <select id="estado">
+                            <option value="">Todos</option>
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                    </label>
+                    <button class="boton" type="button" id="recargar">Actualizar lista</button>
+                </div>
+                <p class="nota-reporte">El usuario para iniciar sesión es el correo. Las contraseñas antiguas almacenadas solo como hash no están disponibles; puedes establecer una nueva al editar.</p>
+                <div class="tabla-wrap">
+                    <table class="admin-tabla">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Usuario / correo</th>
+                                <th>Contraseña</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-clientes"></tbody>
+                    </table>
+                </div>
+                <div class="admin-card" id="editor" hidden>
+                    <h2 id="titulo-editor">Editar cliente</h2>
+                    <form id="form-cliente" class="admin-form">
+                        <label>Nombre completo
+                            <input name="nombre" required minlength="3" maxlength="120">
+                        </label>
+                        <label>Usuario / correo
+                            <input name="correo" type="email" required maxlength="120" autocomplete="off">
+                        </label>
+                        <label>Nueva contraseña (opcional)
+                            <input name="contrasena" type="text" minlength="8" maxlength="128" autocomplete="off"><small>Déjala vacía para conservar la actual.</small></label>
+                        <label>Estado
+                            <select name="activo">
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                        </label>
+                        <div class="acciones">
+                            <button class="boton boton-primario" type="submit">Guardar cambios en Neon</button>
+                            <button class="boton" type="button" id="cancelar">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/administracion-clientes/administracion-clientes.js"></script>
+</body>
+
+</html>

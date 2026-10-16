@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Trabajadores | CineMax Administración</title>
+    <link rel="stylesheet" href="css/trabajadores.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="administracion.html" class="logo">Cine<span>Max</span> <small>Administración</small></a>
+            <nav class="nav-principal" aria-label="Administración">
+                <ul></ul>
+            </nav>
+            <div class="nav-cuenta" id="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Administración de CineMax Perú</p>
+                    <h1>Trabajadores</h1>
+                    <p>Actualiza los datos y roles de tu equipo. Desactivar una cuenta bloquea su acceso sin borrar su historial.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando acceso…</p>
+            <section id="contenido-admin" hidden>
+                <div class="filtros">
+                    <label>Buscar por nombre o correo
+                        <input type="search" id="buscar" placeholder="Buscar trabajador">
+                    </label><a class="boton boton-primario" href="crear-usuarios.html">Crear trabajador</a></div>
+                <div class="tabla-wrap">
+                    <table class="admin-tabla">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Turno laboral</th>
+                                <th>Acceso</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-trabajadores"></tbody>
+                    </table>
+                </div>
+                <div id="editor" class="admin-card" hidden>
+                    <h2 id="titulo-editor">Editar trabajador</h2>
+                    <form id="form-trabajador" class="admin-form">
+                        <label>Nombre completo
+                            <input name="nombre" required minlength="3" maxlength="120" autocomplete="name">
+                        </label>
+                        <label>Correo electrónico
+                            <input name="correo" type="email" required maxlength="120" autocomplete="off">
+                        </label>
+                        <label>Rol
+                            <select name="rol">
+                                <option value="empleado">Empleado</option>
+                                <option value="cajero">Cajero</option><option value="administrador">Administrador</option>
+                            </select>
+                        </label>
+                        <label>Nueva contraseña (opcional)
+                            <input name="contrasena" type="password" minlength="8" maxlength="128" autocomplete="new-password"><small>De 8 a 128 caracteres. Déjala vacía para conservar la actual.</small></label>
+                        <label>Estado de la cuenta
+                            <select name="activo">
+                                <option value="true">Activa</option>
+                                <option value="false">Inactiva</option>
+                            </select>
+                        </label>
+                        <fieldset class="ancho campos-turno" data-campos-turno>
+                            <legend>Turno laboral del empleado</legend>
+                            <div class="turno-form">
+                                <label>Nombre del turno
+                                    <input name="turno_nombre" maxlength="60" placeholder="Ej. Mañana, tarde o noche" required>
+                                </label>
+                                <label>Hora de inicio
+                                    <input name="turno_inicio" type="time" step="60" required>
+                                </label>
+                                <label>Hora de fin
+                                    <input name="turno_fin" type="time" step="60" required>
+                                </label>
+                            </div>
+                            <p class="nota-reporte">Horario diario en hora de Perú. Si la hora final es anterior a la inicial, el turno termina al día siguiente. El acceso se bloquea desde la hora de fin.</p>
+                        </fieldset>
+                        <div class="acciones">
+                            <button type="submit" class="boton boton-primario">Guardar cambios</button>
+                            <button type="button" class="boton" id="cancelar">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/trabajadores/trabajadores.js"></script>
+</body>
+
+</html>

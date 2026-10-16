@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Crear trabajador | CineMax Administración</title>
+    <link rel="stylesheet" href="css/crear-usuarios.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="administracion.html" class="logo">Cine<span>Max</span> <small>Administración</small></a>
+            <nav class="nav-principal" aria-label="Administración">
+                <ul></ul>
+            </nav>
+            <div class="nav-cuenta" id="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Administración de CineMax Perú</p>
+                    <h1>Crear trabajador</h1>
+                    <p>Registra una cuenta de empleado o administrador sin salir de tu sesión.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando acceso…</p>
+            <section id="contenido-admin" hidden>
+                <div class="admin-card">
+                    <form id="form-trabajador" class="admin-form">
+                        <label>Nombre completo
+                            <input name="nombre" required minlength="3" maxlength="120" autocomplete="name">
+                        </label>
+                        <label>Correo electrónico
+                            <input name="correo" type="email" required maxlength="120" autocomplete="off">
+                        </label>
+                        <label>Rol
+                            <select name="rol">
+                                <option value="empleado">Empleado</option>
+                                <option value="cajero">Cajero</option><option value="administrador">Administrador</option>
+                            </select>
+                        </label>
+                        <label>Contraseña inicial
+                            <input name="contrasena" type="password" required minlength="8" maxlength="128" autocomplete="new-password"><small>De 8 a 128 caracteres. Entrega la contraseña al trabajador.</small></label>
+                        <fieldset class="ancho campos-turno" data-campos-turno>
+                            <legend>Turno laboral del empleado</legend>
+                            <div class="turno-form">
+                                <label>Nombre del turno
+                                    <input name="turno_nombre" maxlength="60" placeholder="Ej. Mañana, tarde o noche" required>
+                                </label>
+                                <label>Hora de inicio
+                                    <input name="turno_inicio" type="time" step="60" required>
+                                </label>
+                                <label>Hora de fin
+                                    <input name="turno_fin" type="time" step="60" required>
+                                </label>
+                            </div>
+                            <p class="nota-reporte">Horario diario en hora de Perú. Si la hora final es anterior a la inicial, el turno termina al día siguiente. El acceso se bloquea desde la hora de fin.</p>
+                        </fieldset>
+                        <div class="acciones">
+                            <button type="submit" class="boton boton-primario">Crear cuenta de trabajador</button><a class="boton" href="trabajadores.html">Ver trabajadores</a></div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/crear-usuarios/crear-usuarios.js"></script>
+</body>
+
+</html>

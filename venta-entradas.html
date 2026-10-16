@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Venta de entradas | CineMax Empleado</title>
+    <link rel="stylesheet" href="css/venta-entradas.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="venta-entradas.html" class="logo">Cine<span>Max</span> <small>Taquilla</small></a>
+            <nav class="nav-principal" aria-label="Empleado">
+                <ul></ul>
+            </nav>
+            <div id="nav-cuenta" class="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Área del empleado</p>
+                    <h1>Venta de entradas</h1>
+                    <p>Registra una venta a un cliente, selecciona sus asientos y entrega el código de entrada.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando sesión…</p>
+            <section id="contenido-empleado" hidden>
+                <form id="form-venta" class="admin-card admin-form">
+                    <label class="ancho">Cliente registrado
+                        <select name="id_usuario" required>
+                            <option value="">Cargando clientes…</option>
+                        </select><small>El cliente debe tener una cuenta activa creada en el sitio.</small></label>
+                    <label>Película
+                        <select name="pelicula" required>
+                            <option value="">Cargando catálogo…</option>
+                        </select>
+                    </label>
+                    <label>Fecha de función
+                        <input name="fecha_funcion" type="date" required>
+                    </label>
+                    <label>Horario
+                        <select name="horario">
+                            <option value="tarde">Tarde</option>
+                            <option value="noche">Noche</option>
+                        </select>
+                    </label>
+                    <label>Precio por entrada (S/)
+                        <input name="precio_unitario" readonly type="number" min="0.01" max="9999" step="0.01" placeholder="Ingresa el precio" required>
+                    </label>
+                    <label class="ancho">Comentario
+                        <textarea name="comentario" maxlength="500" rows="2"></textarea>
+                    </label>
+                    <div class="ancho">
+                        <button type="button" id="cargar-asientos" class="boton">Consultar asientos disponibles</button>
+                        <div class="pantalla">PANTALLA</div>
+                        <div id="mapa-asientos" class="asientos-grid" aria-label="Asientos de la sala"></div>
+                        <div class="leyenda"><span>Libre</span><span class="ocupado">Ocupado</span><span class="seleccionado">Seleccionado</span></div>
+                        <p id="info-asientos" class="nota-reporte"></p>
+                        <p id="seleccion" class="total-venta">Selecciona tus asientos.</p>
+                    </div>
+                    <div class="acciones">
+                        <button id="guardar-venta" type="submit" class="boton boton-primario" disabled>Registrar venta en Neon</button>
+                    </div>
+                <div class="campo"><label for="tipo_sala">Formato</label><select name="tipo_sala" id="tipo_sala"><option value="general">General S/16</option><option value="3d">3D S/22</option><option value="prime">Prime S/32</option></select></div></form>
+                <div id="ticket" class="ticket" hidden></div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/venta-entradas/venta-entradas.js"></script>
+</body>
+
+</html>

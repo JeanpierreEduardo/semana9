@@ -1,0 +1,10 @@
+Pruebas automatizadas en PostgreSQL embebido (PGlite), 2026-10-16T04:04:47.231Z
+Escenarios de lógica 1–16: PASS. Tarifario 52.80 / 32.00: PASS. Butacas compartidas, conflicto reserva/taquilla, cancelación, rollback de edición, bloqueo de edición pagada: PASS.
+Prueba de navegador Chromium con base de pruebas aislada: PASS.
+Recorrido cliente: seleccionar 3 butacas, cotizar S/52.80, reservar, rechazar CVV, aprobar, mostrar comprobante.
+Recorrido cajero: login, consultar pagos, verificar, nueva venta con asientos, cobrar S/50 y mostrar vuelto S/34.
+Dos sesiones: taquilla observa C1 reservado y, después del pago del cliente, vendido y bloqueado; actualización automática: PASS.
+Vista móvil de 390 px con mapa de 48 butacas: sin desbordamiento horizontal.
+Verificación estática: sintaxis JS, imports, recursos locales, IDs únicos y etiquetas: PASS.
+Validación W3C remota: no ejecutada. Capturas en la base Neon del usuario: pendientes de ejecutar los scripts.
+Neon remoto: conexión y estructura inspeccionadas en lectura; no se aplicaron migraciones ni cobros remotos.

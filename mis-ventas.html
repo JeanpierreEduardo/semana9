@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mis ventas | CineMax Empleado</title>
+    <link rel="stylesheet" href="css/mis-ventas.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="venta-entradas.html" class="logo">Cine<span>Max</span> <small>Taquilla</small></a>
+            <nav class="nav-principal" aria-label="Empleado">
+                <ul></ul>
+            </nav>
+            <div id="nav-cuenta" class="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Área del empleado</p>
+                    <h1>Mis ventas</h1>
+                    <p>Consulta únicamente las ventas que registraste con tu cuenta de empleado.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando sesión…</p>
+            <section id="contenido-empleado" hidden>
+                <div class="filtros">
+                    <label>Buscar código, cliente o película
+                        <input id="buscar" type="search" placeholder="Buscar venta">
+                    </label>
+                    <label>Estado
+                        <select id="estado">
+                            <option value="">Todos</option>
+                            <option value="registrado">Registrado</option>
+                            <option value="atendido">Atendido</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </label>
+                    <button type="button" id="recargar" class="boton">Actualizar desde Neon</button>
+                </div>
+                <div id="metricas-ventas" class="metricas"></div>
+                <div class="tabla-wrap">
+                    <table class="admin-tabla">
+                        <thead>
+                            <tr>
+                                <th>Código / Cliente</th>
+                                <th>Película</th>
+                                <th>Función</th>
+                                <th>Asientos</th>
+                                <th>Importe</th>
+                                <th>Estado</th>
+                                <th>Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-ventas"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/mis-ventas/mis-ventas.js"></script>
+</body>
+
+</html>

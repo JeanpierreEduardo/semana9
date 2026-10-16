@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Crear película | CineMax Administración</title>
+    <link rel="stylesheet" href="css/crear-peliculas.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="administracion.html" class="logo">Cine<span>Max</span> <small>Administración</small></a>
+            <nav class="nav-principal" aria-label="Administración">
+                <ul></ul>
+            </nav>
+            <div class="nav-cuenta" id="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Administración de CineMax Perú</p>
+                    <h1>Crear película</h1>
+                    <p>Las películas en cartelera aparecerán en el formulario de compra de los clientes.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando acceso…</p>
+            <section id="contenido-admin" hidden>
+                <div class="admin-card">
+                    <form id="form-pelicula" class="admin-form">
+                        <label>Código de película
+                            <input name="clave" required minlength="2" maxlength="80" pattern="[a-z0-9][a-z0-9-]{1,79}" placeholder="ejemplo-pelicula"><small>Identificador único: letras minúsculas, números y guiones.</small></label>
+                        <label>Título
+                            <input name="titulo" required minlength="2" maxlength="120">
+                        </label>
+                        <label>Género
+                            <input name="genero" required maxlength="60" placeholder="Acción, drama, animación…">
+                        </label>
+                        <label>Duración en minutos
+                            <input name="duracion" type="number" min="1" max="600" value="120" required>
+                        </label>
+                        <label>Clasificación
+                            <select name="clasificacion">
+                                <option>Todo público</option>
+                                <option>+7</option>
+                                <option>+14</option>
+                                <option>+18</option>
+                            </select>
+                        </label>
+                        <label>Sala
+                            <input name="sala" required maxlength="20" placeholder="Sala 1">
+                        </label>
+                        <label>Estado
+                            <select name="estado">
+                                <option value="cartelera">En cartelera</option>
+                                <option value="proximamente">Próximamente</option>
+                                <option value="inactiva">Inactiva</option>
+                            </select>
+                        </label>
+                        <label>Póster
+                            <input name="poster" required maxlength="500" value="img/im2.jpg"><small>Ruta en img/ o enlace HTTPS.</small></label>
+                        <label class="ancho">Sinopsis
+                            <textarea name="sinopsis" maxlength="2000" rows="4"></textarea>
+                        </label>
+                        <div class="ancho"><img id="poster-preview" class="poster-preview" src="img/im2.jpg" alt="Vista previa del póster"></div>
+                        <div class="acciones">
+                            <button type="submit" class="boton boton-primario">Crear película</button><a class="boton" href="actualizar-peliculas.html">Ver catálogo</a></div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/crear-peliculas/crear-peliculas.js"></script>
+</body>
+
+</html>

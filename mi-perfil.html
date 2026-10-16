@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mi perfil | CineMax Empleado</title>
+    <link rel="stylesheet" href="css/mi-perfil.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="venta-entradas.html" class="logo">Cine<span>Max</span> <small>Taquilla</small></a>
+            <nav class="nav-principal" aria-label="Empleado">
+                <ul></ul>
+            </nav>
+            <div id="nav-cuenta" class="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Área del empleado</p>
+                    <h1>Mi perfil</h1>
+                    <p>Actualiza únicamente tu correo y tu contraseña. Confirma los cambios con tu contraseña actual.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando sesión…</p>
+            <section id="contenido-empleado" hidden>
+                <div id="datos-perfil" class="datos-perfil"></div>
+                <form id="form-perfil" class="admin-card admin-form">
+                    <label class="ancho">Mi correo
+                        <input name="correo" type="email" maxlength="120" autocomplete="email" required>
+                    </label>
+                    <label class="ancho">Contraseña actual
+                        <input name="contrasena_actual" type="password" maxlength="128" autocomplete="current-password" required>
+                    </label>
+                    <label>Nueva contraseña (opcional)
+                        <input name="contrasena_nueva" type="password" minlength="8" maxlength="128" autocomplete="new-password">
+                    </label>
+                    <label>Confirmar nueva contraseña
+                        <input name="confirmar" type="password" minlength="8" maxlength="128" autocomplete="new-password">
+                    </label>
+                    <div class="ancho"><small>Deja la nueva contraseña vacía para cambiar solo el correo. Tu nombre y rol los administra el administrador.</small></div>
+                    <div class="acciones">
+                        <button type="submit" class="boton boton-primario">Guardar mi perfil en Neon</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/mi-perfil/mi-perfil.js"></script>
+</body>
+
+</html>

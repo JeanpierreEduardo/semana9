@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | CineMax Perú</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://kit.fontawesome.com/065ba884c8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body class="pagina-login">
+
+    <header class="site-header">
+        <div class="contenedor barra">
+            <a href="index.html" class="logo">Cine<span>Max</span> Perú</a>
+            <nav class="nav-principal nav-login">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al sitio</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <div class="auth-fondo" aria-hidden="true"></div>
+
+        <section class="auth-tarjeta">
+            <p class="auth-aviso-protegido" id="auth-aviso" hidden>
+                <i class="fa-solid fa-lock"></i> Inicia sesión para continuar con tu compra de entradas.
+            </p>
+
+            <div class="auth-tabs" role="tablist">
+                <button type="button" class="auth-tab activo" id="tab-login" role="tab" aria-selected="true">Iniciar sesión</button>
+                <button type="button" class="auth-tab" id="tab-registro" role="tab" aria-selected="false">Crear cuenta</button>
+            </div>
+
+            <!-- Formulario: Iniciar sesión -->
+            <form class="formulario-auth" id="form-login" novalidate>
+                <h2>Bienvenido de nuevo</h2>
+                <p class="subtitulo-auth">Ingresa con tu correo y contraseña</p>
+
+                <div class="campo">
+                    <label for="login-correo">Correo electrónico</label>
+                    <input type="email" id="login-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+
+                <div class="campo">
+                    <label for="login-contrasena">Contraseña</label>
+                    <input type="password" id="login-contrasena" name="contrasena" placeholder="••••••••" required>
+                </div>
+
+                <p class="mensaje-error mensaje-error-formulario" id="login-error"></p>
+
+                <button type="submit" class="boton boton-primario boton-ancho">Iniciar sesión</button>
+            </form>
+
+            <!-- Formulario: Crear cuenta -->
+            <form class="formulario-auth" id="form-registro" hidden novalidate>
+                <h2>Crea tu cuenta</h2>
+                <p class="subtitulo-auth">Regístrate para reservar tus entradas</p>
+
+                <div class="campo">
+                    <label for="registro-nombre">Nombre completo</label>
+                    <input type="text" id="registro-nombre" name="nombre" placeholder="Escribe tu nombre" required>
+                </div>
+
+                <div class="campo">
+                    <label for="registro-correo">Correo electrónico</label>
+                    <input type="email" id="registro-correo" name="correo" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+
+                <div class="campo">
+                    <label for="registro-contrasena">Contraseña</label>
+                    <input type="password" id="registro-contrasena" name="contrasena" placeholder="Mínimo 8 caracteres" minlength="8" required>
+                </div>
+
+                <div class="campo">
+                    <label for="registro-confirmar">Confirmar contraseña</label>
+                    <input type="password" id="registro-confirmar" name="confirmar" placeholder="Repite tu contraseña" minlength="8" required>
+                </div>
+
+                <p class="mensaje-error mensaje-error-formulario" id="registro-error"></p>
+
+                <button type="submit" class="boton boton-primario boton-ancho">Crear cuenta</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="contenedor">
+            <p>&copy; 2026 CineMax Perú. Todos los derechos reservados.</p>
+            <p class="footer-nota">LIMA HUAROC JEANPIERRE EDUARDO </p>
+        </div>
+    </footer>
+    <script type="module" src="js/auth/login.js"></script>
+</body>
+
+</html>

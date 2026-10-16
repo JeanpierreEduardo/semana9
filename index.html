@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMax Perú | Cartelera y entradas en línea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://kit.fontawesome.com/065ba884c8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body data-publica="true">
+
+    <header class="site-header">
+        <div class="contenedor barra">
+            <a href="index.html" class="logo">Cine<span>Max</span> Perú</a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle-input">
+            <label for="menu-toggle" class="menu-toggle-boton" aria-label="Abrir menú de navegación">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="nav-principal">
+                <ul>
+                    <li><a href="index.html" class="activo">Inicio</a></li>
+                    <li><a href="cartelera.html">Cartelera</a></li>
+                    <li><a href="como-funciona.html">Cómo funciona</a></li>
+                    <li><a href="registro.html">Reservar</a></li>
+                    <li><a href="ubicacion.html">Ubicación</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-cuenta" id="nav-cuenta">
+                <a href="login.html" class="boton boton-primario boton-nav">Iniciar sesión</a>
+                <a href="login.html?modo=registro" class="boton boton-registro boton-nav">Crear cuenta</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <svg class="hero-icono" viewBox="0 0 120 120" aria-hidden="true">
+                <g>
+                    <rect x="15" y="40" width="80" height="55" rx="4" class="reel-hueco"></rect>
+                    <rect x="15" y="18" width="80" height="18" rx="3" class="reel-aro claqueta-tapa"></rect>
+                    <path d="M15 18 L35 36 M40 18 L60 36 M65 18 L85 36" class="reel-aro claqueta-tapa"></path>
+                </g>
+                <g class="palomitas">
+                    <circle cx="35" cy="105" r="4"></circle>
+                    <circle cx="50" cy="110" r="4"></circle>
+                    <circle cx="65" cy="103" r="4"></circle>
+                </g>
+            </svg>
+
+            <div class="contenedor hero-contenido">
+                <p class="etiqueta-sala">Sala 4 · Estreno de la semana</p>
+                <h1>Vive la película más grande en la pantalla más grande</h1>
+                <p class="hero-texto">
+                    Compra tus entradas en minutos, elige tu asiento y disfruta el estreno en cualquiera de nuestras salas en Lima.
+                </p>
+                <a href="cartelera.html" class="boton boton-primario">Ver cartelera</a>
+            </div>
+        </section>
+
+        <section id="proximos-estrenos" class="seccion">
+            <div class="contenedor">
+                <h2>Próximos estrenos</h2>
+                <p class="subtitulo">Lista de horarios y fechas disponibles a partir de la próxima semana</p>
+
+                <div class="grid-peliculas">
+
+                    <article class="tarjeta-pelicula">
+                        <div class="poster poster-1 poster-destacado">
+                            <input type="checkbox" id="fav-1" class="favorito-input">
+                            <img src="img/im5.jpg" alt="Póster de A través de mi ventana" class="poster-foto" width="250" height="230">
+                            <div class="poster-overlay">
+                                <i class="fa-solid fa-video"></i>
+                                <span>Ver funciones</span>
+                            </div>
+                        </div>
+                        <div class="info-pelicula">
+                            <h3>A través de mi ventana</h3>
+                            <p class="meta">Romance · +14 · 118 min</p>
+
+                            <div class="chips-formato" role="group" aria-label="Formato de proyección">
+                                <input type="radio" name="formato1" id="formato1-2d" class="chip-input" checked>
+                                <label for="formato1-2d" class="chip">2D</label>
+                                <input type="radio" name="formato1" id="formato1-3d" class="chip-input">
+                                <label for="formato1-3d" class="chip">3D</label>
+                            </div>
+
+                            <p class="funciones">
+                                <span>Sala 1</span> · 3:30 pm · 6:15 pm · 9:00 pm
+                            </p>
+                            <a href="cartelera.html" class="boton boton-secundario">Ver cartelera</a>
+                        </div>
+                    </article>
+
+                    <article class="tarjeta-pelicula">
+                        <div class="poster poster-2">
+                            <input type="checkbox" id="fav-2" class="favorito-input">
+                            <img src="img/im6.jpg" alt="Póster de A 2 caras" class="poster-foto" width="250" height="230">
+                            <div class="poster-overlay">
+                                <i class="fa-solid fa-video"></i>
+                                <span>Ver funciones</span>
+                            </div>
+                        </div>
+                        <div class="info-pelicula">
+                            <h3>A 2 caras</h3>
+                            <p class="meta">Suspenso · +14 · 132 min</p>
+
+                            <div class="chips-formato" role="group" aria-label="Formato de proyección">
+                                <input type="radio" name="formato2" id="formato2-2d" class="chip-input" checked>
+                                <label for="formato2-2d" class="chip">2D</label>
+                                <input type="radio" name="formato2" id="formato2-3d" class="chip-input">
+                                <label for="formato2-3d" class="chip">3D</label>
+                            </div>
+
+                            <p class="funciones">
+                                <span>Sala 2</span> · 4:00 pm · 7:00 pm · 9:45 pm
+                            </p>
+                            <a href="cartelera.html" class="boton boton-secundario">Ver cartelera</a>
+                        </div>
+                    </article>
+
+                    <article class="tarjeta-pelicula">
+                        <div class="poster poster-3">
+                            <input type="checkbox" id="fav-3" class="favorito-input">
+                            <img src="img/im7.jpg" alt="Póster de Wish" class="poster-foto" width="250" height="230">
+                            <div class="poster-overlay">
+                                <i class="fa-solid fa-video"></i>
+                                <span>Ver funciones</span>
+                            </div>
+                        </div>
+                        <div class="info-pelicula">
+                            <h3>Wish</h3>
+                            <p class="meta">Animación · Todo público · 95 min</p>
+
+                            <div class="chips-formato" role="group" aria-label="Formato de proyección">
+                                <input type="radio" name="formato3" id="formato3-2d" class="chip-input" checked>
+                                <label for="formato3-2d" class="chip">2D</label>
+                                <input type="radio" name="formato3" id="formato3-3d" class="chip-input">
+                                <label for="formato3-3d" class="chip">3D</label>
+                            </div>
+
+                            <p class="funciones">
+                                <span>Sala 3</span> · 1:00 pm · 3:15 pm · 5:30 pm
+                            </p>
+                            <a href="cartelera.html" class="boton boton-secundario">Ver cartelera</a>
+                        </div>
+                    </article>
+
+                    <article class="tarjeta-pelicula">
+                        <div class="poster poster-4">
+                            <input type="checkbox" id="fav-4" class="favorito-input">
+                            <img src="img/im8.jpg" alt="Póster de No respires" class="poster-foto" width="250" height="230">
+                            <div class="poster-overlay">
+                                <i class="fa-solid fa-video"></i>
+                                <span>Ver funciones</span>
+                            </div>
+                        </div>
+                        <div class="info-pelicula">
+                            <h3>No respires</h3>
+                            <p class="meta">Terror · +18 · 110 min</p>
+
+                            <div class="chips-formato" role="group" aria-label="Formato de proyección">
+                                <input type="radio" name="formato4" id="formato4-2d" class="chip-input" checked>
+                                <label for="formato4-2d" class="chip">2D</label>
+                                <input type="radio" name="formato4" id="formato4-3d" class="chip-input">
+                                <label for="formato4-3d" class="chip">3D</label>
+                            </div>
+
+                            <p class="funciones">
+                                <span>Sala 4</span> · 5:00 pm · 8:00 pm
+                            </p>
+                            <a href="cartelera.html" class="boton boton-secundario">Ver cartelera</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="contenedor">
+            <p>&copy; 2026 CineMax Perú. Todos los derechos reservados.</p>
+            <p class="footer-nota">LIMA HUAROC JEANPIERRE EDUARDO </p>
+        </div>
+    </footer>
+    <script type="module" src="js/index/index.js"></script>
+</body>
+
+</html>

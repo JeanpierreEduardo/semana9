@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mis compras | CineMax Perú</title>
+    <link rel="stylesheet" href="css/consulta.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body data-publica="true">
+    <header class="site-header">
+        <div class="contenedor barra"><a href="index.html" class="logo">Cine<span>Max</span> Perú</a>
+            <nav class="nav-principal">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="cartelera.html">Cartelera</a></li>
+                    <li><a href="registro.html">Comprar entrada</a></li>
+                    <li><a href="consulta.html">Mis compras</a></li>
+                </ul>
+            </nav>
+            <div id="nav-cuenta" class="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="seccion">
+        <div class="contenedor">
+            <h1>Mis compras</h1>
+            <p>Consulta tus compras y su estado. Puedes editar las que siguen registradas.</p>
+            <p id="mensaje" class="mensaje" role="status"></p>
+            <div id="lista-reservas" aria-live="polite">Cargando...</div>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/consulta/consulta.js"></script>
+</body>
+
+</html>

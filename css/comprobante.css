@@ -1,0 +1,5 @@
+@import url("./registro.css");
+@import url("./mejoras.css");
+@import url("./pagos-comun.css");
+@media print{body{background:white!important;color:black!important}.site-header,.site-footer,.eyebrow,main>h1,#mensaje,#imprimir{display:none!important}main{margin:0;padding:0}.comprobante{box-shadow:none;border:1px solid #ccc;max-width:none;margin:0}a{color:black}}
+.comprobante p{color:#334155;line-height:1.7}.comprobante h2{color:#172638}.comprobante strong{display:block;margin:12px 0;color:#172638}

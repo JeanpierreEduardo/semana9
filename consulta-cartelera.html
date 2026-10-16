@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cartelera y asientos | CineMax Empleado</title>
+    <link rel="stylesheet" href="css/consulta-cartelera.css">
+    <link rel="stylesheet" href="css/mejoras.css">
+</head>
+
+<body>
+    <header class="site-header nav-administrativa">
+        <div class="contenedor barra"><a href="venta-entradas.html" class="logo">Cine<span>Max</span> <small>Taquilla</small></a>
+            <nav class="nav-principal" aria-label="Empleado">
+                <ul></ul>
+            </nav>
+            <div id="nav-cuenta" class="nav-cuenta"></div>
+        </div>
+    </header>
+    <main class="admin-main">
+        <div class="contenedor">
+            <div class="admin-cabecera">
+                <div>
+                    <p class="etiqueta">Área del empleado</p>
+                    <h1>Cartelera y asientos</h1>
+                    <p>Consulta las películas y los asientos asignados por sala, fecha y horario. Este apartado no modifica registros.</p>
+                </div>
+            </div>
+            <p id="mensaje" class="mensaje" role="status" aria-live="polite">Verificando sesión…</p>
+            <section id="contenido-empleado" hidden>
+                <div id="cartelera-empleado" class="admin-grid"></div>
+                <form id="form-consulta" class="admin-card admin-form">
+                    <label>Película
+                        <select name="pelicula" required>
+                            <option value="">Cargando catálogo…</option>
+                        </select>
+                    </label>
+                    <label>Fecha de función
+                        <input name="fecha_funcion" type="date" required>
+                    </label>
+                    <label>Horario
+                        <select name="horario">
+                            <option value="tarde">Tarde</option>
+                            <option value="noche">Noche</option>
+                        </select>
+                    </label>
+                    <div class="acciones">
+                        <button type="submit" class="boton boton-primario">Consultar asientos</button>
+                    </div>
+                </form>
+                <div class="admin-card">
+                    <div class="pantalla">PANTALLA</div>
+                    <div id="mapa-asientos" class="asientos-grid" aria-label="Asientos de la sala"></div>
+                    <div class="leyenda"><span>Libre</span><span class="ocupado">Ocupado</span></div>
+                    <p id="info-asientos" class="nota-reporte"></p>
+                    <p class="nota-reporte">Distribución de práctica: 6 filas por 8 asientos. Las compras web antiguas sin asientos asignados no representan una ocupación verificada.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="contenedor">© 2026 CineMax Perú · Jeanpierre Eduardo Lima Huaroc</div>
+    </footer>
+    <script type="module" src="js/consulta-cartelera/consulta-cartelera.js"></script>
+</body>
+
+</html>

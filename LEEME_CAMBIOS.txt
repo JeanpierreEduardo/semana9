@@ -1,0 +1,44 @@
+ACTUALIZACIÓN SEMANA 9
+Lee primero LEEME_SEMANA9.md.
+Ejecuta sql/semana9.sql en Neon antes de abrir la web con Live Server.
+
+CINEMAX: TURNOS, ROLES Y ANIMACIONES
+
+CÓMO ABRIR
+1. Descomprime el ZIP y abre la carpeta Parcial-main en VS Code.
+2. Conserva tu conexión de Neon en js/config/neon-config.js (ya se mantiene la del proyecto recibido).
+3. En Neon > SQL Editor ejecuta sql/actualizar_turnos.sql para actualizar tu base existente.
+   Para una base nueva, ejecuta sql/neon_schema.sql completo.
+4. Clic derecho sobre index.html > Open with Live Server.
+   No necesitas arrancar Node, una API local ni publicar en Vercel.
+   Live Server sirve las páginas con su propia dirección local y puerto, como siempre.
+
+ASIGNAR TURNOS
+1. Inicia sesión como administrador.
+2. En Trabajadores > Editar, asigna a cada empleado nombre de turno, inicio y fin.
+3. También se solicita el turno al crear un nuevo empleado.
+4. El empleado verá su turno en las páginas de su área y en Mi perfil.
+
+REGLAS
+- Los horarios son diarios y usan la hora de Perú (America/Lima) obtenida desde Neon.
+- La hora de inicio permite acceso; desde la hora de fin se bloquea.
+- Ejemplo 13:00–18:00: permite ingresar a las 13:00, bloquea a las 18:00.
+- Ejemplo nocturno 22:00–06:00: termina a las 06:00 del día siguiente.
+- Inicio y fin iguales no son válidos.
+- Los empleados existentes sin turno quedan bloqueados hasta que el administrador les asigne uno.
+- Fuera del turno aparece: Estás fuera de turno laboral.
+- La restricción se verifica al iniciar sesión y antes de cada operación protegida.
+- Una pantalla abierta se revisa cada 30 segundos y al volver a la pestaña.
+- Administradores y clientes conservan su acceso sin restricciones de turno.
+
+ROLES Y ANIMACIONES
+- Debajo del nombre aparece Administrador o Trabajador, según corresponda.
+- Reservas y ventas muestran un indicador mientras se guardan, seguido de una confirmación con
+  un check animado, confeti y código real de entrada. Una operación fallida no muestra éxito.
+- La venta anima el ticket y la selección de asientos.
+- La confirmación admite teclado, Escape y devuelve el foco al cerrar.
+- Se respeta la preferencia del sistema para reducir movimiento.
+
+Se conserva la arquitectura académica original de conexión directa a Neon desde Live Server.
+El control de turnos corresponde a esta aplicación; las credenciales de BD en el navegador
+permiten acceder directamente a la base y no equivalen a permisos de un servidor de producción.

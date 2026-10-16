@@ -1,0 +1,4 @@
+Las pruebas usan una base PostgreSQL embebida aislada, NO tu Neon.
+Opcional para desarrolladores: cd tests, npm install, npm test.
+Node solo se requiere para estas pruebas automatizadas; la aplicación se abre directamente con Live Server.
+El resultado de los 16 escenarios corresponde a pruebas de lógica, no a 16 capturas de la interfaz. La prueba de navegador adicional recorre reserva, tarjeta, caja, comprobante y sincronización entre sesiones.
