@@ -1,5 +1,5 @@
-export const ENLACES_EMPLEADO=[['Venta de entradas','venta-entradas.html'],['Validación de entradas','validar-entradas.html'],['Cartelera y asientos','consulta-cartelera.html'],['Mis ventas','mis-ventas.html'],['Mi perfil','mi-perfil.html']];
-export const ENLACES_CAJA=[['Caja y conciliación','caja.html'],['Venta de entradas','venta-entradas.html']];
+export const ENLACES_EMPLEADO=[['Caja','caja.html'],['Venta de entradas','venta-entradas.html'],['Validación de entradas','validar-entradas.html'],['Cartelera y asientos','consulta-cartelera.html'],['Mis ventas','mis-ventas.html'],['Mi perfil','mi-perfil.html']];
+export const ENLACES_CAJA=[['Caja','caja.html'],['Venta de entradas','venta-entradas.html']];
 export const ENLACES_ADMIN=[['Caja y conciliación','caja.html'],['Administración de clientes','administracion-clientes.html'],['Crear película','crear-peliculas.html'],['Actualizar películas','actualizar-peliculas.html'],['Crear trabajadores','crear-usuarios.html'],['Trabajadores','trabajadores.html'],['Gestión de compras','gestionar-compras.html']];
 export function destinoSesion(usuario,solicitado='index.html'){
  if(usuario.rol==='administrador')return 'administracion-clientes.html';

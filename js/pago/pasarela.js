@@ -1,6 +1,6 @@
 import {validarPago} from './validaciones.js';
 export async function operacionesPago(sql,u,ruta,method,d,{aleatorio}){
- const caja=['cajero','administrador'].includes(u.rol);
+ const caja=['empleado','cajero','administrador'].includes(u.rol);
  if(ruta==='/pagos'&&method==='POST'){
   const datos=validarPago(d),canal=d.canal==='caja'?'caja':'pasarela';
   if(canal==='caja'&&!caja)throw Error('Acceso exclusivo de caja.');
@@ -16,6 +16,7 @@ export async function operacionesPago(sql,u,ruta,method,d,{aleatorio}){
   const busqueda='%'+String(d.busqueda||'').trim()+'%';
   return sql`SELECT c.*,u.dni FROM compras_entradas_cine c JOIN usuarios u ON u.id=c.id_usuario WHERE c.estado_pago='pendiente' AND c.estado='registrado' AND (c.nombre_cliente ILIKE ${busqueda} OR c.codigo_seguimiento ILIKE ${busqueda} OR u.dni ILIKE ${busqueda}) ORDER BY c.id DESC LIMIT 100`;
  }
+ if(['/caja/pagos','/caja/verificar'].includes(ruta)&&u.rol!=='administrador')throw Error('Reportes exclusivos del administrador.');
  if(ruta==='/caja/pagos'&&method==='GET')return sql`SELECT p.*,c.nombre_cliente,v.nombre AS verificador FROM pagos p JOIN compras_entradas_cine c ON c.id=p.id_registro LEFT JOIN usuarios v ON v.id=p.verificado_por WHERE (p.fecha_pago AT TIME ZONE 'America/Lima')::date=(NOW() AT TIME ZONE 'America/Lima')::date ORDER BY p.fecha_pago DESC`;
  if(ruta==='/caja/verificar'&&method==='POST'){
   const rows=await sql`UPDATE pagos SET verificado=TRUE,verificado_por=${u.id},fecha_verificacion=NOW() WHERE id=${Number(d.id)} AND estado='aprobado' AND canal='pasarela' AND verificado=FALSE RETURNING id`;
